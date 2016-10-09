@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+</head>
+<body layout="column">
+    <md-toolbar layout="row">
+        <h1 class="md-toolbar-tools" layout-align-gt-sm="center">Vk Message Viewer</h1>
+    </md-toolbar>
+    <div layout="row" flex>
+        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+
+        </md-sidenav>
+        @RenderBody()
+    </div>
+</body>
+</html>

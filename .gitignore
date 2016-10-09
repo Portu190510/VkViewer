@@ -1,0 +1,14 @@
+packages/
+vkDialogViewer/bin/
+vkDialogViewer/obj/
+VkDialogViewer.Core/bin/Release/VkDialogViewer.Core.pdb
+VkDialogViewer.Core/bin/
+VkDialogViewer.Core/obj/
+VkDialogViewer.DAL/obj/
+VkDialogViewer.DAL/bin/
+VkDialogViewer.BLL/obj/
+VkDialogViewer.BLL/bin/
+VkDialogViewer.ServiceLocator/obj/
+VkDialogViewer.ServiceLocator/bin/
+.vs/
+DB_Backup

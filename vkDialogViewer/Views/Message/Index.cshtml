@@ -1,0 +1,77 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Message Viewer";
+}
+<link href="~/Scripts/date-picker/mbdatepicker.css" rel="stylesheet" />
+<script src="~/Scripts/date-picker/mbdatepicker.js"></script>
+<style type="text/css">
+    .testClass > input {
+        border-bottom: 3px solid #1A4987;
+        border-left: transparent;
+        border-right: transparent;
+        border-top: transparent;
+    }
+</style>
+<div ng-controller="messageCtrl" style="width: 100%; height: 100%">
+    <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding message-list-content" when-scrolled="MessageManager.LoadNextPage()">
+            <md-toolbar md-scroll-shrink>
+                <div class="md-toolbar-tools">
+                    <h3>
+                        <span>Messages (Total Items: {{MessageManager.TotalItemCount}})</span>
+                    </h3>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Settings" ng-click="openRightMenu()">
+                        <md-icon md-svg-icon="~/Images/svg/nut4.svg"></md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-list class="message-list">
+                <md-list-item class="md-3-line md-no-proxy" ng-repeat="message in MessageManager.MessageList" ng-click="showAlert($event,message)">
+                    <img ng-if="!message.IsInbox" ng-src="@Url.Content("~/Images/UserIcons/gnatenko.jpg")" class="md-avatar" />
+                    <img ng-if="message.IsInbox" ng-src="@Url.Content("~/Images/UserIcons/udovikov.jpg")" class="md-avatar" />
+                    <div class="md-list-item-text">
+                        <h3>{{ message.UserName }}</h3>
+                        <h4>{{ message.Body }}</h4>
+                        <p>{{ message.DateTime }}</p>
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+                <div layout="row" style="height: 300px; margin-top: 140px;" ng-show="MessageManager.IsBussy" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="indeterminate" value="{{determinateValue}}"></md-progress-circular>
+                </div>
+            </md-list>
+        </md-content>
+    </div>
+</div>
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Filter</h1>
+    </md-toolbar>
+    <md-content ng-controller="RightCtrl" layout-padding>
+        <form>
+            <md-input-container>
+                <label for="search">Search</label>
+                <input type="text" id="search" ng-model="FilterModel.SearchMask" md-sidenav-focus>
+            </md-input-container>
+            <md-input-container>
+                <label for="dateFrom">From date</label>
+                <input type="date" id="dateFrom" min-date="2013-01-01" max-date="today" ng-model="FilterModel.DateFrom" />
+            </md-input-container>
+            <md-input-container>
+                <label for="dateTo">To date</label>
+                <input type="date" id="dateTo"  min-date="2013-01-01" max-date="today" ng-model="FilterModel.DateTo"/>
+            </md-input-container>
+        </form>
+        <md-button ng-click="apply()" class="md-primary filter-button">
+            Ok
+        </md-button>
+        <md-button ng-click="clear()" class="md-primary filter-button">
+            Clear
+        </md-button>
+        <md-button ng-click="close()" class="md-primary filter-button">
+            Close
+        </md-button>
+    </md-content>
+</md-sidenav>

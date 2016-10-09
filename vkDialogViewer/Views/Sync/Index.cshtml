@@ -1,0 +1,46 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "SyncMessage";
+}
+
+<div>
+    <h2>SyncMessage</h2>
+    <p>
+        <input placeholder="user Id" id="userId" /><button id="connectToVk">Connect</button>
+        <input placeholder="iterattions count" id="iterattionsCount" /><button id="sync">Sync</button>
+    </p>
+</div>
+
+<script>
+    function sendAjax(url, param) {
+        $.ajax({
+            type: "GET",
+            url: url,
+            params: param,
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $("#connectToVk").click(function () {
+            var userId = $("#userId").val();
+
+            sendAjax('../Sync/ConnectToVk', { userId: userId });
+        });
+
+        $("#sync").click(function () {
+            var iterattionsCount = $("#iterattionsCount").val();
+
+            sendAjax('../Sync/StartSyncMessages', { iterattionsCount: iterattionsCount });
+        });
+
+
+    });
+</script>

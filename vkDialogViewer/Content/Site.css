@@ -1,0 +1,17 @@
+﻿body {
+    font-size: .55em;
+}
+
+.message-list {
+    border-left: 1px solid rgba(0,0,0,0.12); 
+    border-right: 1px solid rgba(0,0,0,0.12);
+}
+
+.message-list-content {
+    max-height: 900px;
+    overflow: auto;
+}
+
+.filter-button {
+      min-width: 70px !important;
+}
